@@ -1,6 +1,7 @@
 package datos;
 
 import java.util.ArrayList;
+//import java.util.Iterator;
 
 import entidades.*;
 
@@ -21,7 +22,7 @@ public class CapaDatos {
 			
 			}else {
 				
-				resp = p.getsNombre() + " " + p.getsApellido() + "modificado a ";
+				resp = personaBusqueda.getsNombre() + " " + personaBusqueda.getsApellido() + " modificado a ";
 				AlPersonas.get(index).setsApellido(p.getsApellido());
 				AlPersonas.get(index).setsEmail(p.getsEmail());
 				AlPersonas.get(index).setsNombre(p.getsNombre());
@@ -38,12 +39,34 @@ public class CapaDatos {
 	public Persona BuscaPersona(int dni){
 		
 		Persona p = new Persona();
-		p = null;
-
-		for (int i = 0; i < AlPersonas.size(); i++) {
+		p = null;/*
+		Iterator<Persona> itr = AlPersonas.iterator();
+		
+		while (itr.hasNext()) {
 			
-			p = (AlPersonas.get(i).getiDni() == dni) ? AlPersonas.get(i) : null ;
-			index = i;
+			if (itr.next().getiDni() == dni) {
+				
+				p = itr.next();
+				index = 
+				
+			}
+			
+		}
+		
+*/
+		for (int i = 0; i < AlPersonas.size(); i++) {			
+			
+			if (AlPersonas.get(i).getiDni() == dni) {
+				
+				p = AlPersonas.get(i);
+				index = i;
+				return p;
+				
+			}else {
+				
+				p = null;
+				
+			}						
 			
 		}
 	

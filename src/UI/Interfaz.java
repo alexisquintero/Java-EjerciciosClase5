@@ -16,12 +16,13 @@ import java.awt.event.FocusEvent;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JScrollPane;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 
 public class Interfaz {
 	
 	CapaControlador cc = new CapaControlador();
-	Persona pUI = new Persona();
 	
 	private JFrame frame;
 	private JTextField txtNombre;
@@ -132,6 +133,15 @@ public class Interfaz {
 		txtEmail.setColumns(10);
 		
 		btnGuardar = new JButton("Guardar");
+		btnGuardar.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+					btnGuardarClick();
+				}
+				
+			}
+		});
 		btnGuardar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				btnGuardarClick();
@@ -141,6 +151,14 @@ public class Interfaz {
 		frame.getContentPane().add(btnGuardar);
 		
 		btnBuscar = new JButton("Buscar");
+		btnBuscar.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+					btnBuscarClick();
+				}
+			}
+		});
 		btnBuscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				btnBuscarClick();
@@ -165,6 +183,14 @@ public class Interfaz {
 		Respuesta.setColumns(10);
 		
 		btnActualizar = new JButton("Actualizar");
+		btnActualizar.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+					btnActualizarClick();
+				}
+			}
+		});
 		btnActualizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				btnActualizarClick();
@@ -189,6 +215,32 @@ public class Interfaz {
 				"Apellido", "Nombre", "DNI", "Email"
 			}
 		));
+		
+		JButton btnClear = new JButton("");
+		btnClear.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+					btnClearClick();
+				}
+			}
+		});
+		btnClear.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				btnClearClick();
+			}
+		});
+		btnClear.setBounds(208, 104, 23, 23);
+		frame.getContentPane().add(btnClear);
+	}
+	
+	private void btnClearClick(){
+		
+		txtNombre.setText("Nombre");
+		txtApellido.setText("Apellido");
+		txtEmail.setText("Email");
+		txtDni.setText("DNI");
+		
 	}
 	
 	private void btnActualizarClick(){
@@ -197,10 +249,10 @@ public class Interfaz {
 		al = cc.Listado();
 		String[][] tabla = new String[al.size()][4];
 		DefaultTableModel model = (DefaultTableModel) listado.getModel();
-		for (int i = 0; i < model.getRowCount(); i++) {
-			model.removeRow(i);
-		}
-		
+//		for (int j = model.getRowCount() - 1; j >= 0; j--) {
+//			model.removeRow(j);
+//		}
+		model.setRowCount(0);
 		
 		for (int i = 0; i < al.size(); i++) {
 			
@@ -235,6 +287,7 @@ public class Interfaz {
 	
 	private void btnBuscarClick(){
 		
+		Persona pUI = new Persona();
 		String resp = "Valor inicial";
 		int dni = -1;
 		
@@ -271,6 +324,7 @@ public class Interfaz {
 	
 	private void btnGuardarClick(){
 		
+		Persona pUI = new Persona();
 		String resp = "Valor inicial";
 		
 		if (txtDni.getText().equals("DNI")) {
@@ -327,5 +381,6 @@ public class Interfaz {
 		txtEmail.setText("Email");
 		txtDni.setText("DNI");
 		Respuesta.setText(resp);
+		btnActualizarClick();
 	}
 }

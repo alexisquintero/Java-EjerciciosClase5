@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class CapaControlador {
 	
-	static CapaDatos cd = new CapaDatos();
+	CapaDatos cd = new CapaDatos();
 	
 	public String CreaModificaPersona(Persona p){	
 			
