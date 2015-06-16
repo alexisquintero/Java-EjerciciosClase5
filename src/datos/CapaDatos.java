@@ -6,7 +6,7 @@ import entidades.*;
 
 public class CapaDatos {
 
-	ArrayList<Persona> AlPersonas = new ArrayList<Persona>();
+	private static ArrayList<Persona> AlPersonas = new ArrayList<Persona>();
 	int index = -1;
 	
 	public String CreaModificaPersona(Persona p){
@@ -14,26 +14,31 @@ public class CapaDatos {
 		Persona personaBusqueda = this.BuscaPersona(p.getiDni());
 		String resp = "Valor inicial";
 		
-		this.BuscaPersona(p.getiDni());
-		if (personaBusqueda.equals(null)) {
+		if (personaBusqueda == null) {
 			
 			AlPersonas.add(p);
 			resp = p.getsNombre() + " " + p.getsApellido() + " agregado.";
 			
 			}else {
 				
+				resp = p.getsNombre() + " " + p.getsApellido() + "modificado a ";
 				AlPersonas.get(index).setsApellido(p.getsApellido());
 				AlPersonas.get(index).setsEmail(p.getsEmail());
 				AlPersonas.get(index).setsNombre(p.getsNombre());
-				resp = p.getsNombre() + " " + p.getsApellido() + " modificado.";
-			
-		}
+				resp = resp + p.getsNombre() + " " + p.getsApellido();
+				
+			}
+		
 		return resp;
-	}
+		
+		}
+		
+	
 	
 	public Persona BuscaPersona(int dni){
 		
 		Persona p = new Persona();
+		p = null;
 
 		for (int i = 0; i < AlPersonas.size(); i++) {
 			
@@ -50,7 +55,7 @@ public class CapaDatos {
 		String resp = "Valor inicial";
 		
 		Persona personaBusqueda = this.BuscaPersona(dni);
-		if (personaBusqueda.equals(null)) {
+		if (personaBusqueda == null) {
 			
 			resp = "La persona con el DNI " + String.valueOf(dni) + " no existe.";
 			
@@ -62,6 +67,10 @@ public class CapaDatos {
 		}
 		
 		return resp; 
+	}
+	
+	public ArrayList<Persona> Listado(){
+		return AlPersonas;
 	}
 	
 }

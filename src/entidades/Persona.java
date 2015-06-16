@@ -2,7 +2,8 @@ package entidades;
 
 public class Persona {
 	
-	private int iIdPersona;
+	
+//	private int iIdPersona;
 	private int iDni;
 	private String sNombre;
 	private String sApellido;
@@ -32,11 +33,11 @@ public class Persona {
 	public void setsEmail(String sEmail) {
 		this.sEmail = sEmail;
 	}
-	public int getiIdPersona() {
+/*	public int getiIdPersona() {
 		return iIdPersona;
 	}
 	public void setiIdPersona(int iIdPersona) {
 		this.iIdPersona = iIdPersona;
 	}
-
+*/
 }
